@@ -4,7 +4,6 @@ package lt.viko.eif.dscerbinkinas.PlanuokBack.dto;
 import lombok.Builder;
 import lombok.Value;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.User;
-import java.util.UUID;
 
 @Value
 @Builder
