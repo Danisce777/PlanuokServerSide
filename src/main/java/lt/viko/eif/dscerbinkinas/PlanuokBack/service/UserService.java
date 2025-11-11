@@ -8,6 +8,7 @@ import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserRequestDto;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserResponseDto;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.User;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -22,12 +23,14 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
 
     public UserResponseDto addUser(UserRequestDto request) {
         User user = User.builder()
 
                 .username(request.getUsername())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .email(request.getEmail())
                 .creationDate(OffsetDateTime.now())
                 .build();
