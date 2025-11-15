@@ -1,0 +1,30 @@
+package lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserResponseDto;
+import lt.viko.eif.dscerbinkinas.PlanuokBack.model.User;
+
+@Data
+@AllArgsConstructor
+@Builder
+public class AuthResponse {
+
+    private String token;
+    private String username;
+    private String email;
+    private Long userId;
+
+
+    public static AuthResponse from(User user) {
+        return AuthResponse.builder()
+                .userId(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .build();
+
+    }
+
+}

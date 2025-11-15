@@ -20,7 +20,6 @@ public class UserResponseDto {
         return UserResponseDto.builder()
                 .id(user.getId())
                 .username(user.getUsername())
-                .password(user.getPassword())
                 .email(user.getEmail())
                 .build();
     }
