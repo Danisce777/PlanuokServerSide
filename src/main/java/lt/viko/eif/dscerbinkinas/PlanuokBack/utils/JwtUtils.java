@@ -23,9 +23,6 @@ public class JwtUtils {
 
     private final JwtProperties jwtProperties;
 
-
-    // put username as well???
-
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());

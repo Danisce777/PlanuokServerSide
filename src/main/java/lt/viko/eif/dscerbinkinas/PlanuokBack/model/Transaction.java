@@ -22,8 +22,8 @@ public class Transaction {
     private String transactionCategory;
 
     public enum TransactionType {
-        EXPENSE,
-        INCOME
+        expense,
+        income
     }
 
 

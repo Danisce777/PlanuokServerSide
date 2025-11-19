@@ -5,11 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserRequestDto;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserResponseDto;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.AuthResponse;
+import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.LoginUserDtoRequest;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.RegisterUserDtoRequest;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.exception.UserAlreadyExistsException;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.User;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.repository.UserRepository;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.utils.JwtUtils;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
+    private final AuthenticationManager authenticationManager;
     private UserAlreadyExistsException userAlreadyExistsException;
 
     public UserResponseDto addUser(UserRequestDto request) {

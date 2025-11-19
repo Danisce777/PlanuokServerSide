@@ -18,13 +18,4 @@ public class AuthResponse {
     private Long userId;
 
 
-    public static AuthResponse from(User user) {
-        return AuthResponse.builder()
-                .userId(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .build();
-
-    }
-
 }

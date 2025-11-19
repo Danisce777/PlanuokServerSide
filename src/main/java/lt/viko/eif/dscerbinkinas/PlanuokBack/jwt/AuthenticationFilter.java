@@ -27,6 +27,13 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.startsWith("/api/auth/");
+    }
+
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain
@@ -40,8 +47,13 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
+
+
         final String jwt = authHeader.substring(7);
         final String username = jwtUtils.extractUsername(jwt);
+
+        System.out.println("Extracted username = '" + username + "'");
+
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -59,6 +71,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
+
+        System.out.println("Extracted username = '" + username + "'");
+
+
         filterChain.doFilter(request, response);
     }
 }

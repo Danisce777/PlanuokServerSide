@@ -9,6 +9,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @Builder
+@NoArgsConstructor
 public class RegisterUserDtoRequest {
 
     @NotBlank
