@@ -17,22 +17,6 @@ import java.util.List;
 public interface TransactionRepository {
 
 
-//            transaction_id BIGSERIAL PRIMARY KEY,
-//            description TEXT,
-//            creator_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-//    amount NUMERIC(15,2) NOT NULL,
-//    creation_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-//    transaction_type VARCHAR(20) NOT NULL CHECK (transaction_type IN ('expense', 'income')),
-//    transaction_category VARCHAR(50)
-
-//    private Long transactionId;
-//    private BigDecimal amount;
-//    private User creator;
-//    private String description;
-//    private OffsetDateTime creationDate;
-//    private Transaction.TransactionType transactionType;
-//    private String transactionCategory;
-
     @Insert("""
         INSERT INTO transactions (description, creator_id, amount, creation_date, transaction_type, transaction_category)
         VALUES(#{description}, #{creator.id}, #{amount}, #{creationDate}, #{transactionType}, #{transactionCategory})

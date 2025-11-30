@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/transactions")
@@ -29,5 +31,12 @@ public class TransactionController {
         return transactionService.addTransaction(request, user);
 
     }
+
+    @GetMapping
+    public List<TransactionResponseDto> getAllTransactions() {
+        return transactionService.getAllTransactions();
+    }
+
+
 
 }
