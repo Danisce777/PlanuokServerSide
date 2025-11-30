@@ -26,15 +26,6 @@ public interface UserRepository {
     List<User> getAllUsers();
 
 
-//    @Update("""
-//        UPDATE food_place
-//        SET name = #{name},
-//            location = #{location},
-//            description = #{description},
-//            date_modified = #{dateModified}
-//        WHERE id = #{id}
-//        """)
-
 
     @Update("""
         UPDATE users
@@ -50,6 +41,16 @@ public interface UserRepository {
     Optional<User> getUserById(@Param("id") Long id);
 
 
+    @Select("""
+        SELECT * FROM users WHERE username= #{username}
+    """)
+    Optional<User> getUserByUsername(@Param("username") String username);
+
+
+    @Select("""
+        SELECT * FROM users WHERE email= #{email}
+    """)
+    Optional<User> getUserByEmail(@Param("email") String email);
 
 
 }
