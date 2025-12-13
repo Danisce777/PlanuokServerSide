@@ -5,14 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserRequestDto;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserResponseDto;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.AuthResponse;
-import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.LoginUserDtoRequest;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.RegisterUserDtoRequest;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.exception.UserAlreadyExistsException;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.User;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.repository.UserRepository;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.utils.JwtUtils;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +46,6 @@ public class UserService {
         return userRepository.getAllUsers().stream().map(UserResponseDto::from).collect(Collectors.toList());
     }
 
-
     public AuthResponse registerUser(RegisterUserDtoRequest request) {
 
         if (userRepository.getUserByUsername(request.getUsername()).isPresent()) {
@@ -65,7 +62,6 @@ public class UserService {
                     .email(request.getEmail())
                     .creationDate(OffsetDateTime.now())
                     .build();
-
 
         userRepository.addUser(user);
 

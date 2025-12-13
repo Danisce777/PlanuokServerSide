@@ -22,5 +22,4 @@ public class UserRequestDto {
     @Size(max = 100)
     String email;
 
-
 }

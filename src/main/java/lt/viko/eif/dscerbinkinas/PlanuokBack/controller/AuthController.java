@@ -2,8 +2,6 @@ package lt.viko.eif.dscerbinkinas.PlanuokBack.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserRequestDto;
-import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserResponseDto;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.AuthResponse;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.LoginUserDtoRequest;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.authdto.RegisterUserDtoRequest;
@@ -19,7 +17,6 @@ public class AuthController {
     private final UserService userService;
     private final AuthService authService;
 
-
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public AuthResponse registerUser(@Valid @RequestBody RegisterUserDtoRequest request) {
@@ -27,15 +24,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public AuthResponse loginUser(@Valid @RequestBody LoginUserDtoRequest request) {
-
-        String token = authService.authenticate(request.getEmail(),request.getPassword());
-
-        return AuthResponse.builder()
-                .token(token)
-                .email(request.getEmail())
-                .build();
+    public AuthResponse loginUser(@RequestBody LoginUserDtoRequest request) {
+        return authService.authenticateAndBuildResponse(request.getEmail(), request.getPassword());
     }
-
 
 }

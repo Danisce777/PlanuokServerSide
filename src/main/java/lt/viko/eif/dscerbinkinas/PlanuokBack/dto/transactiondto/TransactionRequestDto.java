@@ -17,13 +17,8 @@ import java.time.OffsetDateTime;
 @Builder
 public class TransactionRequestDto {
 
-
     BigDecimal amount;
-
     String description;
-
     Transaction.TransactionType transactionType;
-
     String transactionCategory;
-
 }

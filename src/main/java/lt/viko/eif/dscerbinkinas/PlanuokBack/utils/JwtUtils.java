@@ -36,7 +36,6 @@ public class JwtUtils {
         return(username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-
     public String createToken(Map<String, Object> claims, String subject) {
         SecretKey key = Keys.hmacShaKeyFor(jwtProperties.getSecret()
                 .getBytes(StandardCharsets.UTF_8));
@@ -50,7 +49,6 @@ public class JwtUtils {
                 .compact();
     }
 
-
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -58,7 +56,6 @@ public class JwtUtils {
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
-
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
@@ -78,9 +75,5 @@ public class JwtUtils {
     public Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-
-
-
-
 
 }

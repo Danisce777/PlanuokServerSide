@@ -1,10 +1,8 @@
 package lt.viko.eif.dscerbinkinas.PlanuokBack.repository;
 
-
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -19,19 +17,17 @@ public interface UserRepository {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void addUser(User user);
 
-
     @Select(""" 
         SELECT * FROM users
     """)
     List<User> getAllUsers();
-
-
 
     @Update("""
         UPDATE users
         SET username = #{username},
             password = #{password},
             email = #{email}
+        WHERE id = #{id}
         """)
     void updateUser(User user);
 
@@ -40,17 +36,18 @@ public interface UserRepository {
     """)
     Optional<User> getUserById(@Param("id") Long id);
 
-
     @Select("""
         SELECT * FROM users WHERE username= #{username}
     """)
     Optional<User> getUserByUsername(@Param("username") String username);
-
 
     @Select("""
         SELECT * FROM users WHERE email= #{email}
     """)
     Optional<User> getUserByEmail(@Param("email") String email);
 
-
+    @Delete("""
+        DELETE FROM users WHERE id= #{id} 
+    """)
+    void deleteUser(@Param("id") Long id);
 }
