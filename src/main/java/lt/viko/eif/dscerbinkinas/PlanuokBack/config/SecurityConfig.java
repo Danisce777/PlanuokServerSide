@@ -1,4 +1,9 @@
 package lt.viko.eif.dscerbinkinas.PlanuokBack.config;
+
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.jwt.AuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +27,19 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth->auth.requestMatchers("/api/auth/**", "/users/**", "/transactions/**")
-                        .permitAll()
+                .authorizeHttpRequests(auth->auth
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/users/**",
+                                "/transactions/**",
+                                // Swagger / OpenAPI
+                                "/v3/api-docs/**",
+                                "/docs/swagger/**",
+                                "/docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/webjars/**"
+                        ).permitAll()
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -32,4 +48,17 @@ public class SecurityConfig {
         return http.build();
     }
 
+    @Bean
+    public OpenAPI customOpenApi() {
+        return new OpenAPI()
+                .components(new Components()
+                        .addSecuritySchemes("bearerAuth",
+                                new SecurityScheme()
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")
+                        )
+                )
+                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"));
+    }
 }

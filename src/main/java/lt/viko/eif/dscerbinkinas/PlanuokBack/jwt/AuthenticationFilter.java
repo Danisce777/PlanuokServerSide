@@ -25,13 +25,11 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     private final JwtUtils jwtUtils;
     private final UserDetailsService userDetailsService;
 
-
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
         return path.startsWith("/api/auth/");
     }
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -39,6 +37,16 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain
     ) throws ServletException, IOException {
 
+        String path = request.getServletPath();
+
+        if (path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-ui")
+                || path.startsWith("/docs")
+                || path.startsWith("/webjars")) {
+
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         final String authHeader = request.getHeader("Authorization");
 
@@ -47,13 +55,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-
-
         final String jwt = authHeader.substring(7);
         final String username = jwtUtils.extractUsername(jwt);
 
         System.out.println("Extracted username = '" + username + "'");
-
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -73,7 +78,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }
 
         System.out.println("Extracted username = '" + username + "'");
-
 
         filterChain.doFilter(request, response);
     }

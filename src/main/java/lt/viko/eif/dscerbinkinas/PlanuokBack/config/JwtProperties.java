@@ -1,6 +1,5 @@
 package lt.viko.eif.dscerbinkinas.PlanuokBack.config;
 
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

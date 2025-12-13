@@ -18,5 +18,4 @@ public class AuthResponse {
     private String password;
     private Long userId;
 
-
 }
