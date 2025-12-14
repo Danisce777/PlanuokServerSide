@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Value;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.dto.UserResponseDto;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.Transaction;
+import lt.viko.eif.dscerbinkinas.PlanuokBack.model.TransactionCategory;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.User;
 
 import java.math.BigDecimal;
@@ -19,7 +20,7 @@ public class TransactionResponseDto {
      String description;
      OffsetDateTime creationDate;
      Transaction.TransactionType transactionType;
-     String transactionCategory;
+     TransactionCategory category;
 
      // Mapper
      public static TransactionResponseDto fromTransaction(Transaction transaction) {
@@ -30,7 +31,7 @@ public class TransactionResponseDto {
                  .description(transaction.getDescription())
                  .creationDate(transaction.getCreationDate())
                  .transactionType(transaction.getTransactionType())
-                 .transactionCategory(transaction.getTransactionCategory())
+                 .category(transaction.getCategory())
                  .build();
      }
 

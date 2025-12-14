@@ -19,13 +19,11 @@ public class Transaction {
     private String description;
     private OffsetDateTime creationDate;
     private TransactionType transactionType;
-    private String transactionCategory;
+    private TransactionCategory category;
 
     public enum TransactionType {
-        expense,
-        income
+        EXPENSE,
+        INCOME
     }
-
-
 
 }

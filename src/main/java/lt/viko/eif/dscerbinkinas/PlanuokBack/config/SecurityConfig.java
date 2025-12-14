@@ -32,6 +32,7 @@ public class SecurityConfig {
                                 "/api/auth/**",
                                 "/users/**",
                                 "/transactions/**",
+                                "/categories/**",
                                 // Swagger / OpenAPI
                                 "/v3/api-docs/**",
                                 "/docs/swagger/**",

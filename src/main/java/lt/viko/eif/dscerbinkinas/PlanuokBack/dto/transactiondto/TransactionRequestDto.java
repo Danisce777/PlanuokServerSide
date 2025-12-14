@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Value;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.Transaction;
+import lt.viko.eif.dscerbinkinas.PlanuokBack.model.TransactionCategory;
 import lt.viko.eif.dscerbinkinas.PlanuokBack.model.User;
 
 import java.math.BigDecimal;
@@ -20,5 +21,5 @@ public class TransactionRequestDto {
     BigDecimal amount;
     String description;
     Transaction.TransactionType transactionType;
-    String transactionCategory;
+    Long categoryId;
 }
