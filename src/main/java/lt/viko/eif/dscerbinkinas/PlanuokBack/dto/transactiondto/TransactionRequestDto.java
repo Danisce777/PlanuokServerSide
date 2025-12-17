@@ -22,4 +22,5 @@ public class TransactionRequestDto {
     String description;
     Transaction.TransactionType transactionType;
     Long categoryId;
+    OffsetDateTime occurredDate;
 }

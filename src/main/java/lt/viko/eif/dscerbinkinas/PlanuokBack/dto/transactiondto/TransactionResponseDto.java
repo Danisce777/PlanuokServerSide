@@ -21,6 +21,7 @@ public class TransactionResponseDto {
      OffsetDateTime creationDate;
      Transaction.TransactionType transactionType;
      TransactionCategory category;
+     OffsetDateTime occurredDate;
 
      // Mapper
      public static TransactionResponseDto fromTransaction(Transaction transaction) {
@@ -32,6 +33,7 @@ public class TransactionResponseDto {
                  .creationDate(transaction.getCreationDate())
                  .transactionType(transaction.getTransactionType())
                  .category(transaction.getCategory())
+                 .occurredDate(transaction.getOccurredDate())
                  .build();
      }
 

@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface TransactionRepository {
 
     @Insert("""
-        INSERT INTO transactions (description, creator_id, amount, creation_date, transaction_type, category_id)
-        VALUES(#{description}, #{creator.id}, #{amount}, #{creationDate}, #{transactionType}, #{category.id})
+        INSERT INTO transactions (description, creator_id, amount, creation_date, transaction_date, transaction_type, category_id)
+        VALUES(#{description}, #{creator.id}, #{amount}, #{creationDate}, #{occurredDate}, #{transactionType}, #{category.id})
     """)
     @Options(useGeneratedKeys = true, keyProperty = "transactionId")
     void addTransaction(Transaction transaction);
@@ -25,6 +25,7 @@ public interface TransactionRepository {
             t.amount,
             t.creation_date,
             t.transaction_type,
+            t.transaction_date,
             c.id as category_id,
             c.name as category_name,
             c.type as category_type,
@@ -48,6 +49,7 @@ public interface TransactionRepository {
             @Result(property = "amount", column = "amount"),
             @Result(property = "creationDate", column = "creation_date"),
             @Result(property = "transactionType", column = "transaction_type"),
+            @Result(property = "occurredDate", column = "transaction_date"),
             @Result(property = "category.id", column = "category_id"),
             @Result(property = "category.name", column = "category_name"),
             @Result(property = "category.type", column = "category_type"),
@@ -69,6 +71,7 @@ public interface TransactionRepository {
             t.amount,
             t.creation_date,
             t.transaction_type,
+            t.transaction_date,
             c.id as category_id,
             c.name as category_name,
             c.type as category_type,
@@ -93,9 +96,9 @@ public interface TransactionRepository {
         SET 
             description = #{description},
             amount = #{amount},
-            creation_date = #{creationDate},
             transaction_type = #{transactionType},
-            category_id = #{category.id}
+            category_id = #{category.id},
+            transaction_date = #{occurredDate}
     WHERE transaction_id = #{transactionId}
     """)
     void updateTransaction(Transaction transaction);

@@ -21,6 +21,8 @@ public class Transaction {
     private TransactionType transactionType;
     private TransactionCategory category;
 
+    private OffsetDateTime occurredDate;
+
     public enum TransactionType {
         EXPENSE,
         INCOME

@@ -48,6 +48,7 @@ public class TransactionService {
                         .creator(authenticatedUser)
                         .description(request.getDescription())
                         .creationDate(OffsetDateTime.now())
+                        .occurredDate(request.getOccurredDate())
                         .transactionType(request.getTransactionType())
                         .category(category)
                         .build();
@@ -98,6 +99,7 @@ public class TransactionService {
         transaction.setAmount(request.getAmount());
         transaction.setDescription(request.getDescription());
         transaction.setTransactionType(request.getTransactionType());
+        transaction.setOccurredDate(request.getOccurredDate());
         transaction.setCategory(category);
 
         transactionRepository.updateTransaction(transaction);
