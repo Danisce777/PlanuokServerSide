@@ -22,6 +22,7 @@ public class Transaction {
     private TransactionCategory category;
 
     private OffsetDateTime occurredDate;
+    private String title;
 
     public enum TransactionType {
         EXPENSE,

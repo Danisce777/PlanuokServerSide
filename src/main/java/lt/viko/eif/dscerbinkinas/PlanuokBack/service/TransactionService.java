@@ -51,6 +51,7 @@ public class TransactionService {
                         .occurredDate(request.getOccurredDate())
                         .transactionType(request.getTransactionType())
                         .category(category)
+                        .title(request.getTitle())
                         .build();
 
         transactionRepository.addTransaction(transaction);
@@ -101,6 +102,7 @@ public class TransactionService {
         transaction.setTransactionType(request.getTransactionType());
         transaction.setOccurredDate(request.getOccurredDate());
         transaction.setCategory(category);
+        transaction.setTitle(request.getTitle());
 
         transactionRepository.updateTransaction(transaction);
         return TransactionResponseDto.fromTransaction(transaction);
